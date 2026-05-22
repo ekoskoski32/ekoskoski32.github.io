@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emmett Koskoski</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #f5f4f0;
+      --white: #ffffff;
+      --text: #2c2c2c;
+      --muted: #7a6f63;
+      --accent: #c9b99a;
+      --tag-bg: #f0ebe3;
+      --tag-text: #6b5e4e;
+      --nav-height: 64px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background-color: var(--bg);
+      color: var(--text);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-height);
+      background: var(--white);
+      box-shadow: 0 1px 12px rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      z-index: 100;
+    }
+
+    .nav-name {
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── SECTIONS ── */
+    section {
+      min-height: 100vh;
+      padding: calc(var(--nav-height) + 60px) 48px 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    section:nth-child(even) { background: var(--white); }
+
+    .section-inner {
+      max-width: 720px;
+      width: 100%;
+    }
+
+    .section-label {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: normal;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+
+    .divider {
+      width: 48px;
+      height: 2px;
+      background: var(--accent);
+      margin-bottom: 36px;
+      border-radius: 2px;
+    }
+
+    /* ── HOME ── */
+    #home {
+      text-align: center;
+      flex-direction: column;
+    }
+
+    .photo-wrapper {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 28px;
+      border: 4px solid var(--accent);
+      background: #e8e4dd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-placeholder { font-size: 72px; line-height: 1; user-select: none; }
+
+    #home h1 {
+      font-size: 2.6rem;
+      font-weight: normal;
+      letter-spacing: 0.02em;
+      margin-bottom: 10px;
+    }
+
+    .home-tagline {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.95rem;
+      color: var(--muted);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      margin-bottom: 36px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .tag {
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.85rem;
+    }
+
+    /* ── ABOUT ── */
+    .about-text {
+      font-size: 1.08rem;
+      line-height: 1.9;
+      color: #3d3730;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .project-card {
+      background: var(--bg);
+      border: 1px solid #e0d9d0;
+      border-radius: 12px;
+      padding: 28px 24px;
+    }
+
+    .project-card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .project-card p {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .placeholder-block {
+      background: #edeae4;
+      border-radius: 8px;
+      height: 20px;
+      margin-bottom: 10px;
+      opacity: 0.6;
+    }
+
+    .placeholder-block.short { width: 60%; }
+    .placeholder-block.medium { width: 80%; }
+    .placeholder-block.full { width: 100%; }
+
+    /* ── RESUME ── */
+    .resume-placeholder {
+      background: var(--white);
+      border: 2px dashed var(--accent);
+      border-radius: 12px;
+      padding: 60px 40px;
+      text-align: center;
+      color: var(--muted);
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .resume-placeholder .icon { font-size: 48px; margin-bottom: 16px; }
+
+    /* ── CONTACT ── */
+    .contact-placeholder {
+      background: var(--white);
+      border: 2px dashed var(--accent);
+      border-radius: 12px;
+      padding: 60px 40px;
+      text-align: center;
+      color: var(--muted);
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .contact-placeholder .icon { font-size: 48px; margin-bottom: 16px; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 32px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.8rem;
+      color: var(--muted);
+      background: var(--white);
+      border-top: 1px solid #e0d9d0;
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 20px; }
+      .nav-links { gap: 18px; }
+      section { padding: calc(var(--nav-height) + 40px) 24px 60px; }
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-name" href="#home">Emmett Koskoski</a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#resume">Resume</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HOME -->
+  <section id="home">
+    <div class="section-inner" style="text-align:center;">
+      <div class="photo-wrapper">
+        <img src="photo.jpg" alt="Emmett Koskoski" />
+      </div>
+      <h1>Emmett Koskoski</h1>
+      <p class="home-tagline">Cognitive Science &amp; Computing &nbsp;·&nbsp; UCLA</p>
+      <div class="tags">
+        <span class="tag">🧠 Memory &amp; Cognition</span>
+        <span class="tag">🎵 Music &amp; the Brain</span>
+        <span class="tag">🥁 Drums &amp; Guitar</span>
+        <span class="tag">⚽ Soccer</span>
+        <span class="tag">✈️ Travel</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <p class="section-label">Background</p>
+      <h2 class="section-title">About Me</h2>
+      <div class="divider"></div>
+      <p class="about-text">
+        I am a rising fourth-year student majoring in Cognitive Science with a specialization in
+        Computing. My research interests center on how mental encoding states influence the cognitive
+        mechanisms underlying memory formation, event segmentation, and recall. I am particularly
+        interested in the intersection of music and cognition. In my spare time I enjoy playing drums
+        and guitar, kicking a soccer ball around, and traveling to new places whenever I get the chance.
+      </p>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-inner">
+      <p class="section-label">My Work</p>
+      <h2 class="section-title">Projects</h2>
+      <div class="divider"></div>
+      <div class="projects-grid">
+
+        <!-- Project 1 placeholder -->
+        <div class="project-card">
+          <h3>Project Title</h3>
+          <p>Description coming soon.</p>
+          <br />
+          <div class="placeholder-block short"></div>
+          <div class="placeholder-block medium"></div>
+          <div class="placeholder-block full"></div>
+        </div>
+
+        <!-- Project 2 placeholder -->
+        <div class="project-card">
+          <h3>Project Title</h3>
+          <p>Description coming soon.</p>
+          <br />
+          <div class="placeholder-block short"></div>
+          <div class="placeholder-block medium"></div>
+          <div class="placeholder-block full"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- RESUME -->
+  <section id="resume">
+    <div class="section-inner">
+      <p class="section-label">Experience</p>
+      <h2 class="section-title">Resume</h2>
+      <div class="divider"></div>
+      <div class="resume-placeholder">
+        <div class="icon">📄</div>
+        <p>Resume coming soon.<br />A downloadable PDF will be linked here.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-inner">
+      <p class="section-label">Get in Touch</p>
+      <h2 class="section-title">Contact</h2>
+      <div class="divider"></div>
+      <div class="contact-placeholder">
+        <div class="icon">✉️</div>
+        <p>Contact information coming soon.<br />Email, LinkedIn, and GitHub will be linked here.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 Emmett Koskoski
+  </footer>
+
+</body>
+</html>
